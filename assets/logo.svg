@@ -1,0 +1,7 @@
+<svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="8" width="40" height="40" rx="13" fill="#D9F55C"/>
+  <path d="M15 34L23 20L31 34" stroke="#0C1F1A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 29H27" stroke="#0C1F1A" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="34" cy="19" r="3" fill="#0C1F1A"/>
+  <text x="56" y="36" fill="#F7F6F1" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.6">Tremplin</text>
+</svg>
