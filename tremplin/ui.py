@@ -167,9 +167,16 @@ header[data-testid="stHeader"] {
 [data-testid="stSidebar"] [data-testid="stExpander"] summary { color: #EAF2ED; }
 
 /* ---- Bouton replier / déplier la barre latérale ---- */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stExpandSidebarButton"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 [data-testid="stSidebarCollapseButton"] button {
-  background: rgba(255,255,255,.08) !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
+  background: rgba(255,255,255,.14) !important;
+  border: 1px solid rgba(255,255,255,.32) !important;
   border-radius: 10px !important;
   width: 34px !important; height: 34px !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
@@ -178,11 +185,14 @@ header[data-testid="stHeader"] {
   transition: all .18s ease;
 }
 [data-testid="stSidebarCollapseButton"] button:hover {
-  background: rgba(255,255,255,.22) !important;
-  border-color: rgba(255,255,255,.4) !important;
+  background: var(--lime) !important;
+  border-color: transparent !important;
 }
 [data-testid="stSidebarCollapseButton"] button [data-testid="stIconMaterial"] {
   color: #EAF2ED !important; font-size: 20px;
+}
+[data-testid="stSidebarCollapseButton"] button:hover [data-testid="stIconMaterial"] {
+  color: #0C1F1A !important;
 }
 [data-testid="stExpandSidebarButton"],
 [data-testid="stSidebarCollapsedControl"] button {
