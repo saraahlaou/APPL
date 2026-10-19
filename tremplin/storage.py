@@ -1,8 +1,11 @@
 """Persistance locale de l'état de l'application (JSON).
 
-Le fichier `data/state.json` contient le profil, l'historique des analyses,
-l'avancement du plan et les préférences (hors clé API). Il est créé
-automatiquement au premier lancement.
+En local, le fichier `data/state.json` conserve le profil, l'historique des
+analyses, l'avancement du plan et les préférences entre deux lancements.
+
+En ligne (Streamlit Community Cloud), plusieurs visiteurs partagent le même
+conteneur : la persistance fichier est alors désactivée pour que chaque
+session reste privée (le profil ne vit qu'en mémoire, côté serveur).
 """
 
 from __future__ import annotations
@@ -27,6 +30,20 @@ STATE_VERSION = 2
 MAX_ANALYSES = 30
 
 
+def _persistence_enabled() -> bool:
+    """La persistance fichier n'est active qu'en local.
+
+    Sur Streamlit Community Cloud, écrire un fichier commun exposerait le
+    profil du dernier visiteur aux suivants : on détecte l'hébergement en
+    ligne et on garde alors l'état uniquement en session.
+    """
+    if os.environ.get("STREAMLIT_SHARING_MODE") or os.environ.get("IS_STREAMLIT_CLOUD"):
+        return False
+    if Path("/mount/src").exists():  # racine des apps Community Cloud
+        return False
+    return True
+
+
 def _empty_state() -> dict:
     return {
         "version": STATE_VERSION,
@@ -40,6 +57,8 @@ def _empty_state() -> dict:
 
 
 def load_state() -> dict:
+    if not _persistence_enabled():
+        return _empty_state()
     if not STATE_FILE.exists():
         return _empty_state()
     try:
@@ -56,7 +75,9 @@ def load_state() -> dict:
 
 
 def save_state() -> None:
-    """Écrit l'état courant de la session dans le fichier JSON."""
+    """Écrit l'état courant de la session dans le fichier JSON (en local)."""
+    if not _persistence_enabled():
+        return
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     state = {
         "version": STATE_VERSION,

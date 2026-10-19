@@ -49,7 +49,15 @@ Par défaut, tout fonctionne hors ligne. Si tu veux un récit personnalisé, des
 
 ## Confidentialité
 
-Profil, analyses et progression sont enregistrés dans `data/state.json`, sur ta machine uniquement. Aucun compte, aucun serveur, aucune télémétrie. Tu peux tout exporter ou tout effacer depuis l'onglet **Données & confidentialité**.
+En local, profil, analyses et progression sont enregistrés dans `data/state.json`, sur ta machine uniquement. En ligne (Streamlit Community Cloud), rien n'est écrit sur le serveur : chaque visiteur a sa **propre session**, en mémoire. Aucun compte, aucune télémétrie. Tu peux tout exporter ou tout effacer depuis l'onglet **Données & confidentialité**.
+
+## Déployer sur Streamlit Community Cloud
+
+1. Pousse le dépôt sur GitHub (branche `main`).
+2. Va sur [share.streamlit.io](https://share.streamlit.io) → **Create app** → choisis le dépôt, la branche `main` et le fichier principal `app.py`.
+3. Clique sur **Deploy** : les dépendances de `requirements.txt` sont installées automatiquement.
+
+En ligne, chaque visiteur dispose de sa propre session (profil en mémoire, jamais partagé entre visiteurs). Pour l'IA optionnelle, chacun colle sa clé API dans **Réglages** — elle reste en session et n'est jamais stockée sur le serveur.
 
 ## Stack
 
